@@ -1,4 +1,9 @@
 import argparse
+
+#`--model` путь к файлу, из которого загружается модель.
+#`--prefix` необязательный аргумент. Начало предложения (одно или несколько слов). Если не указано, выбираем начальное слово случайно из всех слов.
+#`--length` длина генерируемой последовательности.
+
 parser = argparse.ArgumentParser()
 parser.add_argument('--model',  type=str, required=True)
 parser.add_argument('--prefix', type=str, required=True)
