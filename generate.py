@@ -1,3 +1,11 @@
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--model',  type=str, required=True)
+parser.add_argument('--prefix', type=str, required=True)
+parser.add_argument('--length', type=str, required=True)
+args = parser.parse_args()
+####
+
 #генерация последующего слова для триграммы
 corpus = PickledCorpusReader('../data/corpus')
 tokens = [''.join(word) for word in corpus.words()]
