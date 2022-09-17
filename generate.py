@@ -6,9 +6,9 @@ import pickle
 #`--length` длина генерируемой последовательности.
 
 parser = argparse.ArgumentParser()
-parser.add_argument('model',  type=str, required=True)
-parser.add_argument('prefix', type=str, required=True)
-parser.add_argument('length', type=str, required=True)
+parser.add_argument('--model',  type=str, required=True)
+parser.add_argument('--prefix', type=str, required=True)
+parser.add_argument('--length', type=str, required=True)
 args = parser.parse_args()
 ####
 #'../TinkoffML2022/model.pickle'
