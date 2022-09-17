@@ -1,37 +1,39 @@
 import argparse
+import pickle
 
 #`--model` путь к файлу, из которого загружается модель.
 #`--prefix` необязательный аргумент. Начало предложения (одно или несколько слов). Если не указано, выбираем начальное слово случайно из всех слов.
 #`--length` длина генерируемой последовательности.
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model',  type=str, required=True)
-parser.add_argument('--prefix', type=str, required=True)
-parser.add_argument('--length', type=str, required=True)
+parser.add_argument('model',  type=str, required=True)
+parser.add_argument('prefix', type=str, required=True)
+parser.add_argument('length', type=str, required=True)
 args = parser.parse_args()
 ####
+#'../TinkoffML2022/model.pickle'
+with open(str(args.model), 'rb') as handle:
+    Model = pickle.load(handle)
 
-#генерация последующего слова для триграммы
-corpus = PickledCorpusReader('../data/corpus')
-tokens = [''.join(word) for word in corpus.words()]
-vocab = Counter(tokens)
-sents = list([word[0] for word in sent] for sent in corpus.sents())
-counter = count_ngrams(3, vocab, sents)
-knm = KneserNeyModel(counter)
-def complete(input_text):
-    tokenized = nltk.word_tokenize(input_text)
-    if len(tokenized) < 2:
-        response = "Say more."
+#читаем model.pcl
+prefix = str(args.prefix)
+the_length= int(args.length)
+s_out=[]
+
+for ix in range(the_length):
+    x = Model.get(prefix)
+    #print(x)
+# берем первый по порядку появления в тексте вариант
+    if x==None:
+        s_out.append('42')
+        #print("42")
+        break
+    if len(x)==0:
+        s_out.append('42')
+        break
     else:
-        completions = {}
-        for sample in knm.samples():
-            if (sample[0], sample[1]) == (tokenized[-2], tokenized[-1]):
-                completions[sample[2]] = knm.prob(sample)
-        if len(completions) == 0:
-            response = "Can we talk about something else?"
-        else:
-            best = max(completions.keys(), key = (lambda key: completions[key]))
-            tokenized + = [best]
-            response = " ".join(tokenized)
-    return response
-#print(complete("Дело было в"))
+        #print(x[0][0])
+        s_out.append(x[0][0])
+        prefix+=' '+x[0][0]
+
+print(' '.join([str(n) for n in s_out]))  
