@@ -21,12 +21,12 @@ for s in f:
     if s!='':
         snt = s.split('.')
 
-    # Вывести s для контроля
-    #print("s = ", s)
+        # Вывести s для контроля
+        #print("s = ", s)
 
-    # Добавить строку s в список lst2
+        # Добавить строку s в список lst2
     
-    lst_snt = lst_snt + [snt]
+        lst_snt = lst_snt + [snt]
 
 output = []
 outcome = {}
