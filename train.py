@@ -86,7 +86,7 @@ class NgramModel:
 #--model`  путь к файлу, в который сохраняется модель.
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input_dir',  type=str)
+parser.add_argument('--input_dir',  type=str, required=True)
 parser.add_argument('--model', type=str, required=True)
 args = parser.parse_args()
 ####
