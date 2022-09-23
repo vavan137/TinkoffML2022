@@ -69,22 +69,21 @@ class NgramModel:
             #prefix = str(args.prefix)
             #the_length= int(args.length)
             s_out=[]
-
-            for ix in range(the_length):
-                x = Model.get(prefix)
-                #print(x)
-                # берем первый по порядку появления в тексте вариант
-                if x==None:
-                    s_out.append('42')
-                    #print("42")
-                    break
-                if len(x)==0:
-                    s_out.append('42')
-                    break
-                else:
-                    #print(x[0][0])
-                    s_out.append(x[0][0])
-                    prefix+=' '+x[0][0]
+        for ix in range(the_length):
+            x = Model.get(prefix)
+            #print(x)
+            # берем первый по порядку появления в тексте вариант
+            if x==None:
+                s_out.append('42')
+                #print("42")
+                break
+            if len(x)==0:
+                s_out.append('42')
+                break
+            else:
+                #print(x[0][0])
+                s_out.append(x[0][0])
+                prefix+=' '+x[0][0]
 
         print(' '.join([str(n) for n in s_out]))  
         
