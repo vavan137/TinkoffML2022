@@ -32,7 +32,6 @@ class NgramModel:
         for text in lst_snt:
             text = str(text)
 
-        #text = '- у тебя оружие с собой? у меня оружие при мне, а у тебя.'
         # генерирую список с n-граммами до 6
             text = re.sub(r'[^а-яА-Я0-9\s]', ' ', text)
             words = text.split()
@@ -99,11 +98,13 @@ parser.add_argument('--model', type=str, required=True)
 args = parser.parse_args()
 ####
 
-if args.input_dir==None:
-    txt = input()
-    NgramModel.fit(str(args.input_dir), str(args.model), txt)
-else:
-    # раскоментить для сборки модели заново
-    NgramModel.fit(str(args.input_dir), str(args.model))
+
+
+### раскоментить, чтобы переписать model.pkl
+#if args.input_dir==None:
+#    txt = input()
+#    NgramModel.fit(str(args.input_dir), str(args.model), txt)
+#else:
+#    NgramModel.fit(str(args.input_dir), str(args.model))
 
 
