@@ -3,20 +3,28 @@ import re
 import pickle
 
 class NgramModel:
-    def fit(dir='../TinkoffML2022/data/detective/Era_Miloserdiya.txt', model_path='../TinkoffML2022/model.pickle'):
+    def fit(dir='../TinkoffML2022/data/detective/Era_Miloserdiya.txt', model_path='../TinkoffML2022/model.pickle', txt1):
         #
-        f = open(str(dir), 'r', encoding="utf8")
         #список предложений
         lst_snt = []
-        for s in f:
-            # Убрать последний символ '\n' из s
-            s = s.rstrip().lower()
+        
+        if txt1:
+            s = txt1.rstrip().lower()
             if s!='':
                 snt = s.split('.')
-
-                #print("s = ", s)
-                # Добавить строку s в список lst2
                 lst_snt = lst_snt + [snt]
+        else:
+            f = open(str(dir), 'r', encoding="utf8")
+        
+            for s in f:
+                # Убрать последний символ '\n' из s
+                s = s.rstrip().lower()
+                if s!='':
+                    snt = s.split('.')
+
+                    #print("s = ", s)
+                    # Добавить строку s в список lst2
+                    lst_snt = lst_snt + [snt]
         
         output = []
         outcome = {}
@@ -86,12 +94,16 @@ class NgramModel:
 #--model`  путь к файлу, в который сохраняется модель.
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input_dir',  type=str, required=True)
+parser.add_argument('--input_dir',  type=str)
 parser.add_argument('--model', type=str, required=True)
 args = parser.parse_args()
 ####
 
-# раскоментить для сборки модели заново
-#NgramModel.fit(str(input_dir), str(model))
+if args.input_dir==None:
+    txt = input()
+    NgramModel.fit(str(args.input_dir), str(args.model), txt)
+else:
+    # раскоментить для сборки модели заново
+    NgramModel.fit(str(args.input_dir), str(args.model))
 
 
