@@ -92,7 +92,6 @@ args = parser.parse_args()
 ####
 
 # раскоментить для сборки модели заново
-#M = NgramModel
-#M.fit(str(input_dir), str(model))
+#NgramModel.fit(str(input_dir), str(model))
 
 
