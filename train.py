@@ -51,36 +51,35 @@ class NgramModel:
                             res.append((k2[-1], partial_outcome1/partial_outcome))
             outcome[s] = res
             #print(res)
-
         #print(outcome)       
         with open(str(model_path), 'wb') as handle:
             pickle.dump(outcome, handle, protocol=pickle.HIGHEST_PROTOCOL)
         
-            def predict(model_path, prefix, the_length):
-                with open(str(model_path), 'rb') as handle:
-                    Model = pickle.load(handle)
-                #читаем model.pcl
-                #prefix = str(args.prefix)
-                #the_length= int(args.length)
-                s_out=[]
+    def predict(model_path, prefix, the_length):
+        with open(str(model_path), 'rb') as handle:
+            Model = pickle.load(handle)
+            #читаем model.pcl
+            #prefix = str(args.prefix)
+            #the_length= int(args.length)
+            s_out=[]
 
-                for ix in range(the_length):
-                    x = Model.get(prefix)
-                    #print(x)
+            for ix in range(the_length):
+                x = Model.get(prefix)
+                #print(x)
                 # берем первый по порядку появления в тексте вариант
-                    if x==None:
-                        s_out.append('42')
-                        #print("42")
-                        break
-                    if len(x)==0:
-                        s_out.append('42')
-                        break
-                    else:
-                        #print(x[0][0])
-                        s_out.append(x[0][0])
-                        prefix+=' '+x[0][0]
+                if x==None:
+                    s_out.append('42')
+                    #print("42")
+                    break
+                if len(x)==0:
+                    s_out.append('42')
+                    break
+                else:
+                    #print(x[0][0])
+                    s_out.append(x[0][0])
+                    prefix+=' '+x[0][0]
 
-                print(' '.join([str(n) for n in s_out]))  
+        print(' '.join([str(n) for n in s_out]))  
         
 
 #--input_dir` путь к директории, в которой лежит коллекция документов. Если данный аргумент не задан, считать, что тексты вводятся из stdin.
