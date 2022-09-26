@@ -3,11 +3,12 @@ import re
 import pickle
 
 class NgramModel:
+    
+    
     def fit(dir='../TinkoffML2022/data/detective/Era_Miloserdiya.txt', model_path='../TinkoffML2022/model.pickle', txt1):
         #
         #список предложений
         lst_snt = []
-        
         if txt1:
             s = txt1.rstrip().lower()
             if s!='':
@@ -15,31 +16,24 @@ class NgramModel:
                 lst_snt = lst_snt + [snt]
         else:
             f = open(str(dir), 'r', encoding="utf8")
-        
             for s in f:
                 # Убрать последний символ '\n' из s
                 s = s.rstrip().lower()
                 if s!='':
                     snt = s.split('.')
-
                     #print("s = ", s)
                     # Добавить строку s в список lst2
                     lst_snt = lst_snt + [snt]
-        
         output = []
         outcome = {}
-    
         for text in lst_snt:
             text = str(text)
-
         # генерирую список с n-граммами до 6
             text = re.sub(r'[^а-яА-Я0-9\s]', ' ', text)
             words = text.split()
-    
             for WordsToCombine in range(1,7,1):
                 for i in range(len(words)- WordsToCombine+1):
                     output.append(words[i:i+WordsToCombine])
-    
         for k in output:
             #print('k= ', k)
             partial_outcome = output.count(k)
@@ -84,7 +78,6 @@ class NgramModel:
                 #print(x[0][0])
                 s_out.append(x[0][0])
                 prefix+=' '+x[0][0]
-
         print(' '.join([str(n) for n in s_out]))  
         
 
@@ -96,8 +89,6 @@ parser.add_argument('--input_dir',  type=str)
 parser.add_argument('--model', type=str, required=True)
 args = parser.parse_args()
 ####
-
-
 
 ### раскоментить, чтобы переписать model.pkl
 #if args.input_dir==None:
