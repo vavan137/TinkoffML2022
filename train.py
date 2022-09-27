@@ -56,7 +56,7 @@ class NgramModel:
         with open(str(model_path), 'wb') as handle:
             pickle.dump(outcome, handle, protocol=pickle.HIGHEST_PROTOCOL)
         
-    def predict(model_path, prefix, the_length):
+    def predict(model_path='../TinkoffML2022/model.pickle', prefix='сын его', the_length=5):
         with open(str(model_path), 'rb') as handle:
             Model = pickle.load(handle)
             #читаем model.pcl
