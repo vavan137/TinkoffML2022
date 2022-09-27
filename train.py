@@ -64,7 +64,10 @@ class NgramModel:
             #the_length= int(args.length)
             s_out=[]
         for ix in range(the_length):
-            x = Model.get(prefix)
+            #по последнему запрошенному слову поиск
+            list_prefix = prefix.split(' ')
+            prefix_last_word = list_prefix[-1]
+            x = Model.get(prefix_last_word)
             #print(x)
             # берем первый по порядку появления в тексте вариант
             if x==None:
