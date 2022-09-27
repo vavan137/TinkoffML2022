@@ -28,10 +28,10 @@ class NgramModel:
         outcome = {}
         for text in lst_snt:
             text = str(text)
-        # генерирую список с n-граммами до 6
+        # генерирую список с n-граммами до 3
             text = re.sub(r'[^а-яА-Я0-9\s]', ' ', text)
             words = text.split()
-            for WordsToCombine in range(1,7,1):
+            for WordsToCombine in range(1,4,1):
                 for i in range(len(words)- WordsToCombine+1):
                     output.append(words[i:i+WordsToCombine])
         for k in output:
